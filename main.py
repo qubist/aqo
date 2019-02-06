@@ -6,13 +6,14 @@ import busio
 import adafruit_sgp30
 import neopixel
 
-BRIGHTNESS = 1
-
+DISPLAY_BRIGHTNESS = 1
+# number of entries to average to get the displayed value
+BLUR_AMOUNT = 10
 
 # set up pixel array
 pixel_pin = board.D11
 num_pixels = 8
-pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=BRIGHTNESS, auto_write=True) # NOTE: Do I want auto-write here??
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=DISPLAY_BRIGHTNESS, auto_write=True) # NOTE: Do I want auto-write here??
 
 # Turn off board neopixel
 neopixel.NeoPixel(board.NEOPIXEL, 1, auto_write=True)[0] = 0
@@ -25,23 +26,30 @@ print("SGP30 serial #", [hex(i) for i in sgp30.serial])
 sgp30.iaq_init()
 sgp30.set_iaq_baseline(0x8973, 0x8aae)
 
-elapsed_sec = 0
+# set up list of last values to update and average
+vals = [400 for x in range(BLUR_AMOUNT)]
+
+def avg(lst):
+    return sum(lst)/BLUR_AMOUNT
+
 while True:
+
+    # grab the carbon dioxide and TVOC levels from the sensor
+    eCO2, TVOC = sgp30.eCO2, sgp30.TVOC
 
     print("eCO2 = %d ppm \t TVOC = %d ppb" % (sgp30.eCO2, sgp30.TVOC))
 
-    eCO2, TVOC = sgp30.eCO2, sgp30.TVOC
+    # remove oldest datapoint from our list of values and add the new datapoint
+    vals.remove(vals[0])
+    vals.append(eCO2)
 
-    displayColor = mapFromTo(eCO2, 400,1900, 0,255)
+    print(vals)
 
-    for i in range(num_pixels):
-        pixels[i] = wheel(displayColor)
+    # the value we'll work with is the average of our list of values
+    blurredVal = avg(vals)
 
-#    time.sleep(1)
-#    elapsed_sec += 1
-#    if elapsed_sec > 10:
-#        elapsed_sec = 0
-#        print("**** Baseline values: eCO2 = 0x%x, TVOC = 0x%x"
-#              % (sgp30.baseline_eCO2, sgp30.baseline_TVOC))
+    displayWheelPos = mapFromTo(blurredVal, 400,1900, 0,255)
+    displayColor = wheel(displayWheelPos)
+    pixels.fill(displayColor)
 
 #    pixels.show()
