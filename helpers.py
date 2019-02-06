@@ -19,6 +19,11 @@ def wheel(pos):
         b = int(255 - pos*3)
     return (r, g, b)
 
+def dim(color, factor):
+    r, g, b = color
+    dimmedColor = int(r/factor), int(g/factor), int(b/factor)
+    return dimmedColor
+
 # x:input value;
 # a,b:input range
 # c,d:output range
