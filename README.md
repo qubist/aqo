@@ -1,10 +1,8 @@
 # aqo
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 
 > Air Quality Object which beautifully and passively displays the level of CO2 in the air
-
-TODO: Fill out this long description.
 
 ## Table of Contents
 
@@ -19,13 +17,15 @@ TODO: Fill out this long description.
 
 ## Install
 
-```
-```
+Install on an [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) by dragging `lib`, `main.py` and `helpers.py` onto the Feather's CIRCUITPY drive.
+
+### Dependencies
+* [CircuitPython](https://github.com/adafruit/circuitpython)
+* Selected packages from [Adafruit's CircuitPython Library Bundle](https://github.com/adafruit/Adafruit_CircuitPython_Bundle), included in [lib](/lib)
 
 ## Usage
 
-```
-```
+
 
 ## Maintainers
 
@@ -35,7 +35,7 @@ TODO: Fill out this long description.
 
 PRs accepted.
 
-Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
+Note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
 ## License
 
