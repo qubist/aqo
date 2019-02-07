@@ -23,6 +23,9 @@ BLUR_AMOUNT = 75
 LOWBAT_PULSE_SPEED = 200
 LOWBAT_PULSE_DEPTH = 200
 
+VBAT_DESCENT_THRESHOLD = 3.4
+VBAT_ASCENT_THRESHOLD = 3.55
+
 # set up pixel array
 pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=DISPLAY_BRIGHTNESS, auto_write=True) # NOTE: Do I want auto-write here??
 
@@ -62,9 +65,9 @@ while True:
         # get the battery voltage
         voltage = getBatteryVoltage()
         print(voltage)
-        if batLow == False and voltage <= 3.5:
+        if batLow == False and voltage <= VBAT_DESCENT_THRESHOLD:
             batLow = True
-        elif batLow == True and voltage >= 3.6:
+        elif batLow == True and voltage >= VBAT_ASCENT_THRESHOLD:
             batLow = False
 
     # remove oldest datapoint from our list of values and add the new datapoint
