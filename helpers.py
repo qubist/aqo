@@ -26,6 +26,9 @@ def dim(color, factor):
     dimmedColor = int(r/factor), int(g/factor), int(b/factor)
     return dimmedColor
 
+def getVoltage(pin):
+    return (pin.value * 3.3) / 65536
+
 # pulses the input color's brightness according to the device time
 # speed: the speed at which the pulse pulses. 100 is medium, 300 is very slow.
 # depth: how dim the pulse gets at its dimmest. higher values are less
