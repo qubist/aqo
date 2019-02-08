@@ -51,17 +51,19 @@ def avg(lst):
 vals = [400 for x in range(BLUR_AMOUNT)]
 
 batLow = False
+tick = int(time.monotonic())
 
 while True:
-    # which second are we on
-    tick = int(time.monotonic()*100)
+    # update which second are we on, and save the last one
+    lastTick = [tick][0]
+    tick = int(time.monotonic())
 
     # grab the carbon dioxide and TVOC levels from the sensor
     eCO2, TVOC = sgp30.eCO2, sgp30.TVOC
     # eCO2 = sgp30.eCO2
 
-    # only do the following every 10 seconds  FIXME: change so only happens once every 10 seconds
-    if tick % 10 == 0:
+    # only do the following every 10 seconds (on rising edge of 10th second)
+    if tick % 10 == 0 and lastTick %10 != 0:
         # get the battery voltage
         voltage = getBatteryVoltage()
         print(voltage)
