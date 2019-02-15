@@ -21,6 +21,19 @@ def wheel(pos):
         b = int(255 - pos*3)
     return (r, g, b)
 
+# x    input value;
+# a,b  input range
+# c,d  output range
+# y    return value
+def mapFromTo(x,a,b,c,d):
+   y=(x-a)/(b-a)*(d-c)+c
+   return y
+
+# returns bool: whether n is in the given range
+# lower inclusive, upper exclusive (min <= n < max)
+def inRange(n, min, max):
+    return n < max and n >= min
+
 def dim(color, factor):
     r, g, b = color
     dimmedColor = int(r/factor), int(g/factor), int(b/factor)
@@ -41,11 +54,3 @@ def pulse(color, speed, depth):
     dimAmount = timeValue/depth + 1
     # print(dimAmount)
     return dim(color, dimAmount)
-
-# x:input value;
-# a,b:input range
-# c,d:output range
-# y:return value
-def mapFromTo(x,a,b,c,d):
-   y=(x-a)/(b-a)*(d-c)+c
-   return y
