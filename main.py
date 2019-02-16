@@ -23,6 +23,8 @@ BLUR_AMOUNT = 75
 LOWBAT_PULSE_SPEED = 200
 LOWBAT_PULSE_DEPTH = 200
 
+# voltages at which low battery mode is turned on or off when battery voltage is
+# ascending or descending
 VBAT_DESCENT_THRESHOLD = 3.4
 VBAT_ASCENT_THRESHOLD = 3.55
 
@@ -99,8 +101,8 @@ while True:
     blurredVal = avg(vals)
 
     # print(vals)
-    print(blurredVal)
-    # print("eCO2 = %d ppm" % (sgp30.eCO2))
+    print("eCO2 = %d ppm" % (sgp30.eCO2))
+    # print(blurredVal)
     # print(voltage)
 
     displayColor = getColorFromCO2(blurredVal)
