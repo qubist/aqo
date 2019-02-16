@@ -78,8 +78,8 @@ while True:
     tick = int(time.monotonic())
 
     # grab the carbon dioxide and TVOC levels from the sensor
-    eCO2, TVOC = sgp30.eCO2, sgp30.TVOC
-    # eCO2 = sgp30.eCO2
+    # eCO2, TVOC = sgp30.eCO2, sgp30.TVOC
+    eCO2 = sgp30.eCO2
 
     # only do the following every 10 seconds (on rising edge of 10th second)
     if tick % 10 == 0 and lastTick %10 != 0:
@@ -99,8 +99,8 @@ while True:
     blurredVal = avg(vals)
 
     # print(vals)
-    # print("eCO2 = %d ppm \t TVOC = %d ppb" % (sgp30.eCO2, sgp30.TVOC))
     print(blurredVal)
+    # print("eCO2 = %d ppm" % (sgp30.eCO2))
     # print(voltage)
 
     displayColor = getColorFromCO2(blurredVal)
