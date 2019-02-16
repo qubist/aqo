@@ -1,5 +1,7 @@
 import time
 
+MAX_MODE = 2
+
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
@@ -54,3 +56,9 @@ def pulse(color, speed, depth):
     dimAmount = timeValue/depth + 1
     # print(dimAmount)
     return dim(color, dimAmount)
+
+def increment(mode):
+    if mode == MAX_MODE:
+        return 0
+    else:
+        return mode + 1
