@@ -3,12 +3,16 @@ import board
 import busio
 import adafruit_sgp30
 import neopixel
+import touchio
 from analogio import AnalogIn
 
 from helpers import *
 
 PIXEL_PIN = board.D11
 NUM_PIXELS = 8
+
+# pin with touch sensitivity
+TOUCH_PIN = board.A0
 
 # pin with battery voltage for checking battery level
 VBATPIN = board.D9
@@ -28,8 +32,15 @@ LOWBAT_PULSE_DEPTH = 200
 VBAT_DESCENT_THRESHOLD = 3.4
 VBAT_ASCENT_THRESHOLD = 3.55
 
+# how much to dim the display in each mode
+FIRST_DIM_FACTOR  = 3 # dim by half in mode 1
+SECOND_DIM_FACTOR = 25 # dim by 25 times in mode 2
+
 # set up pixel array
 pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=DISPLAY_BRIGHTNESS, auto_write=True) # NOTE: Do I want auto-write here??
+
+touch_pad = TOUCH_PIN
+touch = touchio.TouchIn(touch_pad)
 
 VBatAnalogIn = AnalogIn(VBATPIN)
 def getBatteryVoltage():
@@ -74,10 +85,25 @@ vals = [400 for x in range(BLUR_AMOUNT)]
 batLow = False
 tick = int(time.monotonic())
 
+touched = False
+mode = 0
+
 while True:
     # update which second are we on, and save the last one
     lastTick = [tick][0]
     tick = int(time.monotonic())
+
+    # check touches and cycle through brightnesses if a new touch is detected
+    if touch.value:
+        if touched == False:
+            # activate touch functions
+            print("TOUCHED!")
+            # increment mode
+            mode = increment(mode)
+
+            touched = True
+    else:
+        touched = False
 
     # grab the carbon dioxide and TVOC levels from the sensor
     # eCO2, TVOC = sgp30.eCO2, sgp30.TVOC
@@ -105,7 +131,13 @@ while True:
     # print(blurredVal)
     # print(voltage)
 
-    displayColor = getColorFromCO2(blurredVal)
+    c = getColorFromCO2(blurredVal)
+    if mode == 0:
+        displayColor = c # don't dim
+    elif mode == 1:
+        displayColor = dim(c, FIRST_DIM_FACTOR)
+    elif mode == 2:
+        displayColor = dim(c, SECOND_DIM_FACTOR) # SuperDim for nighttime :)
 
     # pulse the display color if in low battery mode
     if batLow == True:
