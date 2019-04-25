@@ -17,11 +17,11 @@
 
 ## Install
 
-Install on an [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) by dragging `lib`, `main.py` and `helpers.py` onto the Feather's CIRCUITPY drive.
+Install on an [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) by dragging the contents of the [code](/code) folder (`lib`, `main.py` and `helpers.py`) onto the Feather's CIRCUITPY drive.
 
 ### Dependencies
 * [CircuitPython](https://github.com/adafruit/circuitpython)
-* Selected packages from [Adafruit's CircuitPython Library Bundle](https://github.com/adafruit/Adafruit_CircuitPython_Bundle), included in [lib](/lib)
+* Selected packages from [Adafruit's CircuitPython Library Bundle](https://github.com/adafruit/Adafruit_CircuitPython_Bundle), included in [lib](/code/lib)
 
 ## Usage
 
