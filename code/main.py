@@ -22,15 +22,15 @@ DISPLAY_BRIGHTNESS = 1
 # number of entries to average to get the displayed value
 # the higher this is, the slower and smoother color transitions will be
 # 60-80 seems to be good for nice slow transitions while staying responsive
-BLUR_AMOUNT = 75
+BLUR_AMOUNT = 25
 
 LOWBAT_PULSE_SPEED = 200
 LOWBAT_PULSE_DEPTH = 200
 
-# voltages at which low battery mode is turned on or off when battery voltage is
+# voltages at which low battery mode is turned off or on when battery voltage is
 # ascending or descending
-VBAT_DESCENT_THRESHOLD = 3.4
-VBAT_ASCENT_THRESHOLD = 3.55
+VBAT_DESCENT_THRESHOLD = 3.35
+VBAT_ASCENT_THRESHOLD = 3.45
 
 # in each mode, how much to dim the pixels and how many of the pixels to light
 DEFAULT_DIM_FACTOR = 1 # don't dim in mode 0
