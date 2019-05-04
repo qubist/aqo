@@ -32,12 +32,18 @@ LOWBAT_PULSE_DEPTH = 200
 VBAT_DESCENT_THRESHOLD = 3.4
 VBAT_ASCENT_THRESHOLD = 3.55
 
-# how much to dim the display in each mode
-FIRST_DIM_FACTOR  = 3 # dim by half in mode 1
-SECOND_DIM_FACTOR = 25 # dim by 25 times in mode 2
+# in each mode, how much to dim the pixels and how many of the pixels to light
+DEFAULT_DIM_FACTOR = 1 # don't dim in mode 0
+DEFAULT_DIM_MAPPING = [1,1,1,1,1,1,1,1]
+
+FIRST_DIM_FACTOR  = 1 # don't dim
+FIRST_DIM_MAPPING = [1,0,1,0,1,0,1,0]
+
+SECOND_DIM_FACTOR = 20 # dim a lot mode 2
+SECOND_DIM_MAPPING = [1,0,0,0,0,0,0,0]
 
 # set up pixel array
-pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=DISPLAY_BRIGHTNESS, auto_write=True) # NOTE: Do I want auto-write here??
+pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=DISPLAY_BRIGHTNESS, auto_write=True)
 
 touch_pad = TOUCH_PIN
 touch = touchio.TouchIn(touch_pad)
@@ -80,6 +86,15 @@ def getWheelValueFromCO2(CO2):
 def getColorFromCO2(CO2):
     return wheel(getWheelValueFromCO2(CO2))
 
+# shows the color, lighting the pixels corresponding to 1s in a binary array
+def showColor(color, mapping=[1,1,1,1,1,1,1,1]):
+    # crawl the mapping and only light up the pixels which should be activated
+    for n,m in enumerate(mapping):
+        if m == 1:
+            pixels[n] = displayColor
+        else:
+            pixels[n] = 0
+
 # set up list of last values to update and average
 vals = [400 for x in range(BLUR_AMOUNT)]
 batLow = False
@@ -93,11 +108,11 @@ while True:
     lastTick = [tick][0]
     tick = int(time.monotonic())
 
-    # check touches and cycle through brightnesses if a new touch is detected
+    # check touches and cycle through brightness modes if a new touch is detected
     if touch.value:
         if touched == False:
             # activate touch functions
-            print("TOUCHED!")
+            # print("TOUCHED!")
             # increment mode
             mode = increment(mode)
 
@@ -134,14 +149,17 @@ while True:
     c = getColorFromCO2(blurredVal)
     if mode == 0:
         displayColor = c # don't dim
+        pixelMapping = DEFAULT_DIM_MAPPING
     elif mode == 1:
         displayColor = dim(c, FIRST_DIM_FACTOR)
+        pixelMapping = FIRST_DIM_MAPPING
     elif mode == 2:
         displayColor = dim(c, SECOND_DIM_FACTOR) # SuperDim for nighttime :)
+        pixelMapping = SECOND_DIM_MAPPING
 
     # pulse the display color if in low battery mode
     if batLow == True:
-        pixels.fill(pulse(displayColor, LOWBAT_PULSE_SPEED, LOWBAT_PULSE_DEPTH))
+        ShowColor(pulse(displayColor, LOWBAT_PULSE_SPEED, LOWBAT_PULSE_DEPTH), pixelMapping)
     # otherwise just display the color
     else:
-        pixels.fill(displayColor)
+        showColor(displayColor, pixelMapping)
