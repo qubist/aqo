@@ -37,7 +37,7 @@ DEFAULT_DIM_FACTOR = 1 # don't dim in mode 0
 DEFAULT_DIM_MAPPING = [1,1,1,1,1,1,1,1]
 
 FIRST_DIM_FACTOR  = 1 # don't dim
-FIRST_DIM_MAPPING = [1,0,1,0,1,0,1,0]
+FIRST_DIM_MAPPING = [0,1,0,0,1,0,0,1]
 
 SECOND_DIM_FACTOR = 20 # dim a lot mode 2
 SECOND_DIM_MAPPING = [1,0,0,0,0,0,0,0]
