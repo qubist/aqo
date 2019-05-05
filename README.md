@@ -17,7 +17,7 @@
 
 Changes color depending on air CO2 content.
 
-![values](/values.png)
+![values](/images/values.png)
 
 ## Install
 
