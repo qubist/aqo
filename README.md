@@ -15,6 +15,10 @@
 
 ## Background
 
+Changes color depending on air CO2 content.
+
+![values](/values.png)
+
 ## Install
 
 Install on an [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) by dragging the contents of the [code](/code) folder (`lib`, `main.py` and `helpers.py`) onto the Feather's CIRCUITPY drive.
