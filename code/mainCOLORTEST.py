@@ -14,9 +14,6 @@ NUM_PIXELS = 8
 # pin with touch sensitivity
 TOUCH_PIN = board.A0
 
-# pin with battery voltage for checking battery level
-VBATPIN = board.D9
-
 DISPLAY_BRIGHTNESS = 1
 
 # number of entries to average to get the displayed value

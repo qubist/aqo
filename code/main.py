@@ -24,8 +24,8 @@ DISPLAY_BRIGHTNESS = 1
 # 60-80 seems to be good for nice slow transitions while staying responsive
 BLUR_AMOUNT = 25
 
-LOWBAT_PULSE_SPEED = 200
-LOWBAT_PULSE_DEPTH = 200
+# LOWBAT_PULSE_SPEED = 200
+# LOWBAT_PULSE_DEPTH = 200
 
 # voltages at which low battery mode is turned off or on when battery voltage is
 # ascending or descending
