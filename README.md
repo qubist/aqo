@@ -37,7 +37,7 @@ The aqo should stay plugged in, but it has a battery and can be unplugged for pe
 
 To remove the bottom cover for maintenance, twist it and the magnets will disengage. Then it should pop free. You can also lever it free using the power cable or maybe even shake it free.
 
-* I'm not 100% sure about all this stuff. I'll try and figure it out later.
+\* I'm not 100% sure about all this stuff. I'll try and figure it out later.
 
 ## Maintainers
 
