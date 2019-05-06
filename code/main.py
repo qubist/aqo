@@ -29,8 +29,8 @@ LOWBAT_PULSE_DEPTH = 200
 
 # voltages at which low battery mode is turned off or on when battery voltage is
 # ascending or descending
-VBAT_DESCENT_THRESHOLD = 3.35
-VBAT_ASCENT_THRESHOLD = 3.45
+# VBAT_DESCENT_THRESHOLD = 3.35
+# VBAT_ASCENT_THRESHOLD = 3.45
 
 # in each mode, how much to dim the pixels and how many of the pixels to light
 DEFAULT_DIM_FACTOR = 1 # don't dim in mode 0
@@ -48,9 +48,9 @@ pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=DISPLAY_BRIGHTNESS,
 touch_pad = TOUCH_PIN
 touch = touchio.TouchIn(touch_pad)
 
-VBatAnalogIn = AnalogIn(VBATPIN)
-def getBatteryVoltage():
-    return getVoltage(VBatAnalogIn) * 2
+# VBatAnalogIn = AnalogIn(VBATPIN)
+# def getBatteryVoltage():
+#     return getVoltage(VBatAnalogIn) * 2
 
 # Turn off board neopixel
 neopixel.NeoPixel(board.NEOPIXEL, 1, auto_write=True)[0] = 0
@@ -97,7 +97,7 @@ def showColor(color, mapping=[1,1,1,1,1,1,1,1]):
 
 # set up list of last values to update and average
 vals = [400 for x in range(BLUR_AMOUNT)]
-batLow = False
+# batLow = False
 tick = int(time.monotonic())
 
 touched = False
@@ -125,14 +125,14 @@ while True:
     eCO2 = sgp30.eCO2
 
     # only do the following every 10 seconds (on rising edge of 10th second)
-    if tick % 10 == 0 and lastTick %10 != 0:
-        # get the battery voltage
-        voltage = getBatteryVoltage()
-        print(voltage)
-        if batLow == False and voltage <= VBAT_DESCENT_THRESHOLD:
-            batLow = True
-        elif batLow == True and voltage >= VBAT_ASCENT_THRESHOLD:
-            batLow = False
+    # if tick % 10 == 0 and lastTick %10 != 0:
+    #     # get the battery voltage
+    #     voltage = getBatteryVoltage()
+    #     print(voltage)
+    #     if batLow == False and voltage <= VBAT_DESCENT_THRESHOLD:
+    #         batLow = True
+    #     elif batLow == True and voltage >= VBAT_ASCENT_THRESHOLD:
+    #         batLow = False
 
     # remove oldest datapoint from our list of values and add the new datapoint
     vals.remove(vals[0])
@@ -158,8 +158,8 @@ while True:
         pixelMapping = SECOND_DIM_MAPPING
 
     # pulse the display color if in low battery mode
-    if batLow == True:
-        ShowColor(pulse(displayColor, LOWBAT_PULSE_SPEED, LOWBAT_PULSE_DEPTH), pixelMapping)
+    # if batLow == True:
+        # ShowColor(pulse(displayColor, LOWBAT_PULSE_SPEED, LOWBAT_PULSE_DEPTH), pixelMapping)
     # otherwise just display the color
-    else:
-        showColor(displayColor, pixelMapping)
+#    else:
+    showColor(displayColor, pixelMapping)
