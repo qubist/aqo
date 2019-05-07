@@ -31,7 +31,7 @@ Then, do the wiring and assemble the parts into the case.
 * [3.7v 1200mAh LiPo Battery](https://www.adafruit.com/product/258) — for backup power
 * [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) — to control everything
 
-![Circuit diagram for the aqo, showing how to connect the Feather M0, SPG30, NeoPixel Bar, and battery together](/wiring/aqo_circuit.png)
+<img src="https://github.com/qubist/aqo/blob/master/wiring/aqo_circuit.png" alt="Circuit diagram for the aqo, showing how to connect the Feather M0, SPG30, NeoPixel Bar, and battery together" width="250"/>
 
 ## Usage
 
