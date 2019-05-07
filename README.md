@@ -15,17 +15,23 @@
 
 ## Background
 
-Changes color depending on air CO2 content.
+[Too much CO2 in the air affects how well brains function.](https://ehp.niehs.nih.gov/doi/pdf/10.1289/ehp.1510037#page=6&zoom=auto,-131,530) The Air Quality Object changes color depending on air CO2 content. It's meant to be a beautiful object which also passively displays information about the surroundings.
 
-![values](/images/values.png)
+![Chart displaying 5 levels of air quality. Each level has three data points: CO2 (ppm), Color, and Color on wheel. Ideal: 400–450 ppm, blue, 210; Acceptable: 450–600 ppm, green, 0; Intermediate: 600–1300 ppm, yellow/orange, 55–74; Bad: 1300–2500, red, 85; Dangerous: 2500–5000, maroon/purple, 95–120](/images/values.png)
 
-## Install
+## Install/Assembly
 
-Install on an [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) by dragging the contents of the [code](/code) folder (`lib`, `main.py` and `helpers.py`) onto the Feather's CIRCUITPY drive.
+Install the code on an [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) by dragging the contents of the [code](/code) folder (`lib`, `main.py` and `helpers.py`) onto the Feather's CIRCUITPY drive.
 
-### Dependencies
-* [CircuitPython](https://github.com/adafruit/circuitpython)
-* Selected packages from [Adafruit's CircuitPython Library Bundle](https://github.com/adafruit/Adafruit_CircuitPython_Bundle), included in [lib](/code/lib)
+Then, do the wiring and assemble the parts into the case.
+
+### Parts
+* [Adafruit SGP30 Air Quality Sensor Breakout](https://www.adafruit.com/product/3709) — for measuring CO2
+* [Adafruit NeoPixel Stick 8x RGB LED](https://www.adafruit.com/product/1426) — for displaying the color
+* [3.7v 1200mAh LiPo Battery](https://www.adafruit.com/product/258) — for backup power
+* [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) — to control everything
+
+![Circuit diagram for the aqo, showing how to connect the Feather M0, SPG30, NeoPixel Bar, and battery together](/wiring/aqo_circuit.png)
 
 ## Usage
 
