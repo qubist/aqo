@@ -23,7 +23,7 @@
 
 Install the code on an [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) by dragging the contents of the [code](/code) folder (`lib`, `main.py` and `helpers.py`) onto the Feather's CIRCUITPY drive.
 
-Then, do the wiring and assemble the parts into the case.
+Wire together and assemble the parts into the case.
 
 ### Parts
 * [Adafruit SGP30 Air Quality Sensor Breakout](https://www.adafruit.com/product/3709) — for measuring CO2
