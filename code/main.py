@@ -42,6 +42,8 @@ FIRST_DIM_MAPPING = [0,1,0,0,1,0,0,1]
 SECOND_DIM_FACTOR = 20 # dim a lot mode 2
 SECOND_DIM_MAPPING = [1,0,0,0,0,0,0,0]
 
+UBER_DIM_FACTOR = 30
+
 # set up pixel array
 pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=DISPLAY_BRIGHTNESS, auto_write=True)
 
@@ -53,7 +55,8 @@ touch = touchio.TouchIn(touch_pad)
 #     return getVoltage(VBatAnalogIn) * 2
 
 # Turn off board neopixel
-neopixel.NeoPixel(board.NEOPIXEL, 1, auto_write=True)[0] = 0
+boardPixel = neopixel.NeoPixel(board.NEOPIXEL, 1, auto_write=True)
+boardPixel[0] = 0
 
 # Set up I2C for CO2 sensor
 i2c = busio.I2C(board.SCL, board.SDA, frequency=100000)
@@ -88,12 +91,19 @@ def getColorFromCO2(CO2):
 
 # shows the color, lighting the pixels corresponding to 1s in a binary array
 def showColor(color, mapping=[1,1,1,1,1,1,1,1]):
-    # crawl the mapping and only light up the pixels which should be activated
-    for n,m in enumerate(mapping):
-        if m == 1:
-            pixels[n] = displayColor
-        else:
-            pixels[n] = 0
+    # if in UberDIM mode, turn off all pixels but light the board pixel
+    if(mapping == "uberdim"):
+        pixels.fill(0)
+        boardPixel[0] = color
+    else:
+        # turn off the board pixel
+        boardPixel[0] = 0
+        # crawl the mapping and light up the pixels which should be activated
+        for n,m in enumerate(mapping):
+            if m == 1:
+                pixels[n] = color
+            else:
+                pixels[n] = 0
 
 # set up list of last values to update and average
 vals = [400 for x in range(BLUR_AMOUNT)]
@@ -156,6 +166,9 @@ while True:
     elif mode == 2:
         displayColor = dim(c, SECOND_DIM_FACTOR) # SuperDim for nighttime :)
         pixelMapping = SECOND_DIM_MAPPING
+    elif mode == 3:
+        displayColor = dim(c, UBER_DIM_FACTOR) # UberDIM !! >:}
+        pixelMapping = "uberdim"
 
     # pulse the display color if in low battery mode
     # if batLow == True:
