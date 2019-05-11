@@ -47,6 +47,7 @@ UBER_DIM_FACTOR = 30
 # set up pixel array
 pixels = neopixel.NeoPixel(PIXEL_PIN, NUM_PIXELS, brightness=DISPLAY_BRIGHTNESS, auto_write=True)
 
+# set up touch sensitivity
 touch_pad = TOUCH_PIN
 touch = touchio.TouchIn(touch_pad)
 
@@ -66,6 +67,7 @@ print("SGP30 serial #", [hex(i) for i in sgp30.serial])
 sgp30.iaq_init()
 sgp30.set_iaq_baseline(0x8973, 0x8aae)
 
+# define an average function that calculates the average of our values
 def avg(lst):
     return sum(lst)/BLUR_AMOUNT
 
@@ -118,7 +120,7 @@ while True:
     lastTick = [tick][0]
     tick = int(time.monotonic())
 
-    # check touches and cycle through brightness modes if a new touch is detected
+    # check touches and cycle through brightness modes if new touch is detected
     if touch.value:
         if touched == False:
             # activate touch functions
@@ -151,8 +153,10 @@ while True:
     # the value we'll work with is the average of our list of values
     blurredVal = avg(vals)
 
+    # these print statements are usefull, but slow down the program if it's not
+    # plugged in and able to actually print to serial
     # print(vals)
-    print("eCO2 = %d ppm" % (sgp30.eCO2))
+    # print("eCO2 = %d ppm" % (sgp30.eCO2))
     # print(blurredVal)
     # print(voltage)
 
@@ -170,9 +174,9 @@ while True:
         displayColor = dim(c, UBER_DIM_FACTOR) # UberDIM !! >:}
         pixelMapping = "uberdim"
 
-    # pulse the display color if in low battery mode
+    # # pulse the display color if in low battery mode
     # if batLow == True:
-        # ShowColor(pulse(displayColor, LOWBAT_PULSE_SPEED, LOWBAT_PULSE_DEPTH), pixelMapping)
-    # otherwise just display the color
-#    else:
+    #     ShowColor(pulse(displayColor, LOWBAT_PULSE_SPEED, LOWBAT_PULSE_DEPTH), pixelMapping)
+    # # otherwise just display the color
+    # else:
     showColor(displayColor, pixelMapping)
