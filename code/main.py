@@ -107,6 +107,20 @@ def showColor(color, mapping=[1,1,1,1,1,1,1,1]):
             else:
                 pixels[n] = 0
 
+# runs a startup animation
+# lights turn on from bottom to top, with a slight color change.
+def startupAnimation(delay, destinationColor, colorStep):
+    # start out with all pixels off
+    animationMapping = [0,0,0,0,0,0,0,0]
+    i = 0
+    # start the color the right amount away from destination
+    color = destinationColor + colorStep * 8
+    for i in range(8):
+        animationMapping[i] = 1
+        showColor(wheel(color), animationMapping)
+        color -= colorStep
+        time.sleep(delay)
+
 # set up list of last values to update and average
 vals = [400 for x in range(BLUR_AMOUNT)]
 # batLow = False
@@ -114,6 +128,9 @@ tick = int(time.monotonic())
 
 touched = False
 mode = 0
+
+# show startup animation
+startupAnimation(.045, 210, 3)
 
 while True:
     # update which second are we on, and save the last one
