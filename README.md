@@ -16,7 +16,7 @@
 
 ## Background
 
-[Too much CO2 in the air affects how well brains function.](https://ehp.niehs.nih.gov/doi/pdf/10.1289/ehp.1510037#page=6&zoom=auto,-131,530) The Air Quality Object changes color depending on air CO2 content. It's meant to be a beautiful object which also passively displays information about the surroundings. It makes a normally-invisible flow visible, so you can open a window when your air is getting stale.
+[Too much CO2 in the air affects how well brains function.](https://ehp.niehs.nih.gov/doi/pdf/10.1289/ehp.1510037#page=6&zoom=auto,-131,530) The Air Quality Object changes color depending on air CO2 content. It's meant to be a beautiful object which also passively displays information about the surroundings. It makes a normally invisible flow visible, so you can open a window when your air is getting stale.
 
 ![Chart displaying 5 levels of air quality. Each level has three data points: CO2 (ppm), Color, and Color on wheel. Ideal: 400–450 ppm, blue, 210; Acceptable: 450–600 ppm, green, 0; Intermediate: 600–1300 ppm, yellow/orange, 55–74; Bad: 1300–2500, red, 85; Dangerous: 2500–5000, maroon/purple, 95–120](/images/values.png)
 
