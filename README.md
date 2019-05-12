@@ -27,10 +27,10 @@ Install the code on an [Adafruit Feather M0 Express](https://www.adafruit.com/pr
 Wire together and assemble the parts into the case.
 
 ### Parts
-* [Adafruit SGP30 Air Quality Sensor Breakout](https://www.adafruit.com/product/3709) — for measuring CO2
-* [Adafruit NeoPixel Stick 8x RGB LED](https://www.adafruit.com/product/1426) — for displaying the color
-* [3.7v 1200mAh LiPo Battery](https://www.adafruit.com/product/258) — for backup power
-* [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) — to control everything
+* [Adafruit SGP30 Air Quality Sensor Breakout](https://www.adafruit.com/product/3709) for measuring CO2
+* [Adafruit NeoPixel Stick 8x RGB LED](https://www.adafruit.com/product/1426) for displaying the color
+* [3.7v 1200mAh LiPo Battery](https://www.adafruit.com/product/258) for backup power
+* [Adafruit Feather M0 Express](https://www.adafruit.com/product/3403) to control everything
 
 <img src="https://github.com/qubist/aqo/blob/master/wiring/aqo_circuit.png" alt="Circuit diagram for the aqo, showing how to connect the Feather M0, SPG30, NeoPixel Bar, and battery together" width="250"/>
 
